@@ -29,10 +29,28 @@ var start = function () {
       {
         type: 'input',
         name: 'selection',
-        message: 'Type the number associated with the product you are interested in.'
+        message: 'Type the number associated with the product you are interested in.',
+        validate: function(value) {
+          if (isNaN(value) === false) {
+              return true;
+          } else {
+              return false;
+          }
+      }
+      {
+        type: 'input',
+        name: 'quantity',
+        message: 'How many would you like to order?',
+        validate: function(value) {
+          if (isNaN(value) === false) {
+              return true;
+          } else {
+              return false;
+          }
+        }
       }     
     ]).then(function (answers) {
-    // Use user feedback for... whatever!! 
+    
   });
 }
 
