@@ -25,6 +25,7 @@ connection.query("SELECT * FROM products", function(err, results) {
 });
 
 var start = function () {
+  console.log('hello');
   inquirer.prompt([
       {
         type: 'input',
@@ -36,7 +37,8 @@ var start = function () {
           } else {
               return false;
           }
-      }
+        }
+      },
       {
         type: 'input',
         name: 'quantity',
@@ -53,5 +55,6 @@ var start = function () {
     
   });
 }
+
 
 
