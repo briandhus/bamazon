@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+require('console.table');
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -15,8 +16,24 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  
+  // console.log('hello');
 });
 
+connection.query("SELECT * FROM products", function(err, results) {
+	console.table(results);
+  start();
+});
+
+var start = function () {
+  inquirer.prompt([
+      {
+        type: 'input',
+        name: 'selection',
+        message: 'Type the number associated with the product you are interested in.'
+      }     
+    ]).then(function (answers) {
+    // Use user feedback for... whatever!! 
+  });
+}
 
 
