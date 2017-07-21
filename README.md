@@ -10,9 +10,11 @@ This is the home screen where the customer is asked to place their order. The cu
 This is the screen where the customer is asked to choose the quantity of the item that they'd like to purchase.
 
 
+
 ![alt text](https://github.com/briandhus/bamazon/blob/master/images/customerView1.png)
 
 This is showing the result of the customer's selection.
+
 
 
 ![alt text](https://github.com/briandhus/bamazon/blob/master/images/customerView2.png)
