@@ -16,16 +16,17 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  // console.log('hello');
+  
 });
 
 connection.query("SELECT * FROM products", function(err, results) {
+  console.log('');
 	console.table(results);
   start();
 });
 
 var start = function () {
-  console.log('hello');
+  
   inquirer.prompt([
       {
         type: 'input',
@@ -44,6 +45,7 @@ var start = function () {
         name: 'quantity',
         message: 'How many would you like to order?',
         validate: function(value) {
+
           if (isNaN(value) === false) {
               return true;
           } else {
@@ -52,9 +54,42 @@ var start = function () {
         }
       }     
     ]).then(function (answers) {
-    
+      var item = answers.selection;
+      var quantity = parseInt(answers.quantity);
+      
+      var userSelection = availability(item, checkResults);
+
+
+      // var userQuantity = 
   });
 }
+
+function availability(item, checkResults) {
+  // check amount of stock vs amount ordered
+  connection.query('SELECT * FROM products WHERE id =?', item, function(err, results) {
+    if (err) throw err;
+    
+    checkResults(results[1]);
+    // selectedAmount(results);
+  }) 
+} 
+
+var checkResults = function(item) {
+
+  console.log(item);
+
+
+}
+
+var selectedAmount = function(quantity) {
+  console.log(quantity);
+}
+
+
+
+
+
+
 
 
 
