@@ -60,6 +60,8 @@ var start = function () {
       var userSelection = availability(item, checkResults);
 
 
+
+
       // var userQuantity = 
   });
 }
@@ -69,7 +71,7 @@ function availability(item, checkResults) {
   connection.query('SELECT * FROM products WHERE id =?', item, function(err, results) {
     if (err) throw err;
     
-    checkResults(results[1]);
+    checkResults(results);
     // selectedAmount(results);
   }) 
 } 
@@ -78,11 +80,6 @@ var checkResults = function(item) {
 
   console.log(item);
 
-
-}
-
-var selectedAmount = function(quantity) {
-  console.log(quantity);
 }
 
 
