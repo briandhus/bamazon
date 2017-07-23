@@ -23,7 +23,7 @@ var quantity;
 
 connection.query("SELECT * FROM products", function(err, results) {
   console.log('');
-	console.table(results);
+  console.table(results);
   start();
 });
 
