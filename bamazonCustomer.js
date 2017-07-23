@@ -19,9 +19,11 @@ connection.connect(function(err) {
   
 });
 
+var quantity;
+
 connection.query("SELECT * FROM products", function(err, results) {
   console.log('');
-	console.table(results);
+  console.table(results);
   start();
 });
 
@@ -55,32 +57,43 @@ var start = function () {
       }     
     ]).then(function (answers) {
       var item = answers.selection;
-      var quantity = parseInt(answers.quantity);
+      quantity = parseInt(answers.quantity);
       
-      var userSelection = availability(item, checkResults);
-
-
-
+      var userSelection = availability(item);
+      // console.log(quantity);
 
       // var userQuantity = 
   });
 }
 
-function availability(item, checkResults) {
+function availability(item) {
   // check amount of stock vs amount ordered
   connection.query('SELECT * FROM products WHERE id =?', item, function(err, results) {
     if (err) throw err;
+
+    if (quantity > results[0].stock) {
+      console.log("Sorry, but your order exceeds are stock amount.");
+      start();
+    } else {
+      connection.query('UPDATE products SET ? WHERE ?',
+        [
+          {
+            stock: results[0].stock - quantity
+          },
+          {
+            id: item
+          }
+        ]
+      );
+      console.log('Congratulations, you purchased a ' + results[0].product);
+      console.log('Your order total is: ' + parseFloat(quantity * results[0].price));
+      start();
+    }
     
-    checkResults(results);
     // selectedAmount(results);
   }) 
 } 
 
-var checkResults = function(item) {
-
-  console.log(item);
-
-}
 
 
 
